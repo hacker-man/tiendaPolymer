@@ -1,0 +1,35 @@
+<dom-module id="wc-subcategories">
+    <template>
+        <style>
+
+        </style>
+        <iron-ajax auto url="/api/colec-item" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
+        <h3>{{subcat}}</h3>
+        <template is="dom-repeat" items="{{items}}" as="item">
+            <wc-item data={{item}}></wc-item>
+        </template>
+    </template>
+    <script>
+    (function() {
+        WCSubcategories = Polymer({
+            is: 'wc-subcategories',
+            properties: {
+                subcat: {
+                    type: String,
+                    value: ""
+                },
+                items: {
+                    type: Array,
+                    value: function(){
+                        return [];
+                    }
+                }
+            },
+            ready: function() {},
+            handleResponse: function(res, req, err) {
+                this.items = res.detail.response.itemSpiderman;
+            }
+        });
+    })();
+    </script>
+</dom-module>

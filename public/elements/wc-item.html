@@ -1,9 +1,6 @@
 <dom-module id="wc-item">
     <template>
         <style is="custom-style">
-            .wrapper {
-                width: 20px;
-            }
             <style is="custom-style" > .film-header {
                 @apply(--paper-font-headline);
             }
@@ -19,9 +16,8 @@
                 color: var(--paper-amber-500);
             }
 
-        </style>
-    </style>
-    <iron-ajax
+        </style> 
+<!--     <iron-ajax
     auto url="/api/colec-item"
     handle-as="json"
     on-response="handleResponse"
@@ -38,26 +34,39 @@
                     <paper-button>Añadir Carrito</paper-button>
                 </div>
             </paper-card>
-        </div>
+        </template>
+    </div> -->
+<!--        <div class="wrapper"> -->
+           <paper-card heading="Emmental" image="http://placehold.it/350x150/FFC107/000000">
+                <div class="card-content">
+                    <div class="film-header">{{data.nombre}}</div>
+                    <p>Precio: {{data.precio}} &euro;</p>
+                </div>
+                <div class="card-actions">
+                    <paper-button>Añadir Carrito</paper-button>
+                </div>
+            </paper-card>
+<!--        </div> -->
+        
     </template>
-</template>
 <script>
     (function() {
         WCItem = Polymer({
             is: 'wc-item',
             properties: {
-                items: {
-                    type: Array,
+                 data: {
+                    type: Object,
                     value: function() {
                         return [];
                     }
                 }
             },
             ready: function() {
+                console.log(this.data);
             },
-            handleResponse: function(res, req, err) {
+/*            handleResponse: function(res, req, err) {
                 this.items = res.detail.response.itemSpiderman;
-            }
+            }*/
         });
     })();
 </script>
