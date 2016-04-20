@@ -1,7 +1,18 @@
 <dom-module id="wc-header">
     <template>
-        <style>
+        <style is="custom-style">
+            paper-toolbar.green {
+                --paper-toolbar-background: green;
+                --paper-toolbar-height: 40px;
+                --paper-toolbar-title: {
+                    font-style: italic;
+                    font-weight: bold;
+                };
+            }
         </style>
+        <paper-toolbar class="green">
+            <div class="title">Comic Shop</div>
+        </paper-toolbar>
     </template>
     <script>
     (function() {
