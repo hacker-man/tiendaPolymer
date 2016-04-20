@@ -1,0 +1,51 @@
+{
+    "name": "DC",
+    "subcategorias": [
+        {
+            "name": "spiderman",
+            "items": [
+                {
+                    "fecha": "10/03/1993",
+                    "numero": 3,
+                    "precio": 10
+                },
+                {
+                    "fecha": "10/03/1993",
+                    "numero": 4,
+                    "precio": 10
+                },
+                {
+                    "fecha": "10/03/1993",
+                    "numero": 5,
+                    "precio": 10
+                }
+            ]
+        },
+        {
+            "name": "batman",
+            "items": [
+                {
+                    "fecha": "10/03/1993",
+                    "numero": 3,
+                    "precio": 10
+                },
+                {
+                    "fecha": "10/03/1993",
+                    "numero": 4,
+                    "precio": 10
+                }
+            ]
+        },
+        {
+            "name": "superman",
+            "items": [
+                {
+                    "fecha": "10/03/1993",
+                    "numero": 3,
+                    "precio": 10
+                }
+            ]
+        }
+
+    ]
+}

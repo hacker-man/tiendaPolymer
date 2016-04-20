@@ -1,0 +1,48 @@
+<dom-module id="wc-menu">
+    <template>
+        <style is="custom-style">
+            .menu {
+                width: 20%;
+            }
+
+        </style>
+        <div class="menu">
+            <paper-menu id="menu" selected="0">
+                <template is="dom-repeat" items="{{categories}}" as="categorie">
+                    <paper-item on-tap="onBtnTap" id="{{index}}" value={{categorie}}>{{categorie}}</paper-item>
+                </template>
+            </paper-menu>
+        </div>
+    </template>
+    <script>
+    (function() {
+        WCMenu = Polymer({
+            is: 'wc-menu',
+            properties: {
+                categories:{
+                    type: Array,
+                    value: function(){
+                        return [];
+                    }
+                },
+                selectedCategorie:{
+                    type: String,
+                    value: ""
+                }
+            },
+            ready: function() {
+                // TODO cargar por defecto la primera categoria
+                // this.$.menu.selected = 0;
+                this.categories = ["DC", "Marvel", "Black"];
+            },
+            onBtnTap: function(e) {
+                e.stopPropagation();
+                // console.log(Polymer.dom(this).children);
+                this.$.menu.selected = e.target.id;
+                this.selectedCategorie = e.target.value;
+                // this.fire ('change', {title:this.title, time:e.target.value});
+            },
+        });
+    })();
+    </script>
+</dom-module>
