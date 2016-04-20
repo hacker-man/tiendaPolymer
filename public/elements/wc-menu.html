@@ -15,12 +15,12 @@
             }
             ;
         }
-        
+
         paper-menu {
             --paper-menu-background-color: rgb(124, 247, 124);
             padding: 0px;
         }
-        
+
         .div-paper-toolbar {
             background-color: green;
             border-bottom: 5px solid black;
@@ -28,14 +28,14 @@
             font-size: 20px;
             font-weight: bold;
         }
-        
+
         .div-colection {
             background-color: grey;
             color: black;
             border-radius: 10px;
             border-color: black;
         }
-        
+
         .item-category {
             border: 2px solid black;
         }
@@ -125,7 +125,7 @@
                 // this.fire ('change', {title:this.title, time:e.target.value});
             },
             handleResponse: function(res, req, err) {
-                this.categories = res.detail.__data__.response.names;
+                this.categories = res.detail.response.names;
             }
         });
     })();

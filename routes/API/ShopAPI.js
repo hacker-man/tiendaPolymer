@@ -18,9 +18,29 @@ router.get('/colec-name', function(req, res, next) {
     });
 });
 router.get('/colec-sub', function(req, res, next) {
+  //DC,Marvel,DarkHorse
+  switch (req.query.sub) {
+    case "DC":
+    res.status(200).json({
+        subcateories: ["Superman", "Batman", "Flash"]
+    });
+    break;
+    case "Marvel":
     res.status(200).json({
         subcateories: ["Spiderman", "Batman", "Spawn"]
     });
+    break;
+    case "DarkHorse":
+    res.status(200).json({
+        subcateories: ["Spawn", "Sin City", "HellBoy"]
+    });
+    break;
+    default:  res.status(404).json({
+          result: "No existe esa categoría"
+      });
+
+  }
+
 });
 router.get('/colec-item', function(req, res, next) {
 
