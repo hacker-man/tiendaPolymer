@@ -26,19 +26,16 @@ router.get('/colec-item', function(req, res, next) {
 
     res.status(200).json({
         itemSpiderman: [{
-            "fecha": "10/03/1993",
             "nombre": "Spiderman 3",
             "precio": 10
 
         },
       {
-        "fecha": "10/03/1998",
         "nombre": "Spiderman 6",
         "precio": 10
       },{
-        "fecha": "10/03/1998",
         "nombre": "Spiderman 7",
-        "precio": 7
+        "precio": 7.5
       }]
 
     });
