@@ -1,0 +1,33 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<dom-module id="wc-window">
+    <template>
+        <style is="custom-style">
+            paper-toolbar.red {
+                --paper-toolbar-background: green;
+                --paper-toolbar-height: 40px;
+                --paper-toolbar-title: {
+                    font-style: italic;
+                    font-weight: bold;
+                };
+            }
+            .menu {
+
+                width: 131px;
+            }
+
+        </style>
+        <paper-toolbar class="red">
+            <div class="title">Shop</div>
+        </paper-toolbar>
+        <div class="menu">
+            <paper-menu>
+                <paper-item>Item 1</paper-item>
+                <paper-item>Item 2</paper-item>
+            </paper-menu>
+        </div>
+
+    </template>
+    <script>
+        Polymer({is: "wc-window"});
+    </script>
+</dom-module>
