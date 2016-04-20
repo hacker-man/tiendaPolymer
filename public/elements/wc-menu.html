@@ -40,8 +40,9 @@
             border: 2px solid black;
         }
         </style>
-        <iron-ajax auto url="/api/colec-name" handle-as="json" on-response="handleResponse" debounce-duration="300">
-        </iron-ajax>
+        <iron-ajax auto url="/api/colec-name" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
+        <iron-ajax auto url="/api/colec-name/?sub={{selectedCategorie}}" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
+
         <paper-drawer-panel>
             <paper-header-panel drawer>
                 <paper-toolbar class="div-paper-toolbar">
@@ -68,8 +69,8 @@
                         <h1>Categoria {{selectedCategorie}}</h1>
                         <template is="dom-repeat" items="{{subcategories}}" as="subcat">
                             <div class="div-colection">
-                                <wc-colection>
-                                    <h3>{{subcat}}</h3></wc-colection>
+                                <h3>{{subcat}}</h3>
+                                <wc-subcategories data={{subcat}}></wc-subcategories>
                             </div>
                         </template>
                     </template>
@@ -125,7 +126,7 @@
                 // this.fire ('change', {title:this.title, time:e.target.value});
             },
             handleResponse: function(res, req, err) {
-                this.categories = res.detail.__data__.response.names;
+                this.categories = res.detail.response.names;
             }
         });
     })();
