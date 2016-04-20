@@ -7,10 +7,42 @@ var Usuario = mongoose.model('Usuario');
 var Item = mongoose.model('Item');
 
 
-router.get('/',function(req, res, next) {
+router.get('/', function(req, res, next) {
     res.send('Hola Soy tu API');
 });
 
+router.get('/colec-name', function(req, res, next) {
+    res.status(200).json({
+        names: ["DC", "Marvel", "DarkHorse"]
+
+    });
+});
+router.get('/colec-sub', function(req, res, next) {
+    res.status(200).json({
+        subcateories: ["Spiderman", "Batman", "Spawn"]
+    });
+});
+router.get('/colec-item', function(req, res, next) {
+
+    res.status(200).json({
+        itemSpiderman: [{
+            "fecha": "10/03/1993",
+            "nombre": "Spiderman 3",
+            "precio": 10
+
+        },
+      {
+        "fecha": "10/03/1998",
+        "nombre": "Spiderman 6",
+        "precio": 10
+      },{
+        "fecha": "10/03/1998",
+        "nombre": "Spiderman 7",
+        "precio": 7
+      }]
+
+    });
+});
 router.get('/users', function(req, res, next) {
     var sort = req.query.sort || 'nickname';
     Usuario.list(sort, function(err, rows) {
@@ -133,55 +165,55 @@ router.post('/items', function(req, res) {
     });
 
 });
-router.post("/itemsCart",function(req,res){
+router.post("/itemsCart", function(req, res) {
     var ItemsMiCarrito = Item.find({
-      en_carrito: req.body.en_carrito
+        en_carrito: req.body.en_carrito
     });
-    ItemsMiCarrito.exec(function(err,rows){
-      if(err){
-        res.status(400).json({
-            result: false,
-            status: 'Bad Request',
-            err: err
+    ItemsMiCarrito.exec(function(err, rows) {
+        if (err) {
+            res.status(400).json({
+                result: false,
+                status: 'Bad Request',
+                err: err
+            });
+            return;
+        }
+        res.status(200).json({
+            myItems: rows
         });
-        return;
-      }
-      res.status(200).json({
-        myItems:rows
-      });
     });
 });
-router.post("/itemsContrib",function(req,res){
+router.post("/itemsContrib", function(req, res) {
     var ItemsMiCarrito = Item.find({
-      uploadBy: req.body.uploadBy
+        uploadBy: req.body.uploadBy
     });
-    ItemsMiCarrito.exec(function(err,rows){
-      if(err){
-        res.status(400).json({
-            result: false,
-            status: 'Bad Request',
-            err: err
+    ItemsMiCarrito.exec(function(err, rows) {
+        if (err) {
+            res.status(400).json({
+                result: false,
+                status: 'Bad Request',
+                err: err
+            });
+            return;
+        }
+        res.status(200).json({
+            myItems: rows
         });
-        return;
-      }
-      res.status(200).json({
-        myItems:rows
-      });
     });
 });
-router.post('/datauser',function(req,res){
-  var data_user = Usuario.find({
-      nickname: req.body.nickname
-  });
-  data_user.exec(function(err,row){
-    if(err){
-      return;
-    }
-    res.status(200).json({
-        result:true,
-        user:row
+router.post('/datauser', function(req, res) {
+    var data_user = Usuario.find({
+        nickname: req.body.nickname
     });
-  });
+    data_user.exec(function(err, row) {
+        if (err) {
+            return;
+        }
+        res.status(200).json({
+            result: true,
+            user: row
+        });
+    });
 });
 router.post('/login', function(req, res) {
     //var user = new Usuario(req.body);
@@ -195,14 +227,14 @@ router.post('/login', function(req, res) {
         }
         if (row.length == 0) {
             res.status(401).json({
-                result:false,
+                result: false,
                 info: "passOrNickInvalid",
             });
         } else {
             res.status(200).json({
-                result:true,
+                result: true,
                 info: "LoginOK",
-                user:row
+                user: row
             });
         }
 
@@ -254,8 +286,10 @@ router.put('/items/:id', function(req, res) {
     });
 });
 
-router.delete("/items/:id",function(req,res){
-  Item.remove({ _id: req.params.id }, function(err) {
+router.delete("/items/:id", function(req, res) {
+    Item.remove({
+        _id: req.params.id
+    }, function(err) {
         if (!err) {
             return res.send('Item deleted!');
         } else {
