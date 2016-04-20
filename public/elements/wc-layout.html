@@ -1,12 +1,13 @@
 <dom-module id="wc-layout">
     <template>
-        <style> 
+        <style>
+            .subcategorie{
+                background-color: grey;
+                border-color: black;
+            } 
         </style>
-            <wc-header></wc-header>
-            <wc-menu select={{selectedCategorie}}></wc-menu>
-            <template>
-                <wc-colection></wc-colection>
-            </template>
+        <wc-menu></wc-menu>
+
     </template>
     <script>
     (function() {

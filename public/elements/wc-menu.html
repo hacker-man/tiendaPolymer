@@ -1,56 +1,133 @@
 <dom-module id="wc-menu">
     <template>
         <style is="custom-style">
-            .menu {
-                width: 20%;
+        paper-drawer-panel {
+            --paper-drawer-panel-main-container: {
+                background-color: rgb(184, 255, 184);
             }
-
+            ;
+            --paper-drawer-panel-left-drawer-container: {
+                background-color: rgb(2, 158, 2);
+            }
+            ;
+            --paper-drawer-panel-scrim: {
+                background-color: rgb(184, 255, 184);
+            }
+            ;
+        }
+        
+        paper-menu {
+            --paper-menu-background-color: rgb(124, 247, 124);
+            padding: 0px;
+        }
+        
+        .div-paper-toolbar {
+            background-color: green;
+            border-bottom: 5px solid black;
+            color: black;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .div-colection {
+            background-color: grey;
+            color: black;
+            border-radius: 10px;
+            border-color: black;
+        }
+        
+        .item-category {
+            border: 2px solid black;
+        }
         </style>
-        <iron-ajax
-        auto url="/api/colec-name"
-        handle-as="json"
-        last-response={{categories}}
-        debounce-duration="300">
+        <iron-ajax auto url="/api/colec-name" handle-as="json" on-response="handleResponse" debounce-duration="300">
         </iron-ajax>
-        <div class="menu">
-            <paper-menu id="menu" selected="0">
-                <template is="dom-repeat" items="{{categories.names}}" as="categorie">
-                    <paper-item on-tap="onBtnTap" id="{{index}}" value={{categorie}}>{{categorie}}</paper-item>
-                </template>
-            </paper-menu>
-        </div>
-        <wc-item></wc-item>
+        <paper-drawer-panel>
+            <paper-header-panel drawer>
+                <paper-toolbar class="div-paper-toolbar">
+                    <div>Categories</div>
+                </paper-toolbar>
+                <paper-menu id="menu">
+                    <template is="dom-repeat" items="{{categories}}" as="categorie">
+                        <paper-item class="item-category" on-tap="onBtnTap" id="{{index}}" value={{categorie}}>{{categorie}}</paper-item>
+                    </template>
+                </paper-menu>
+            </paper-header-panel>
+            <paper-header-panel main>
+                <paper-toolbar class="div-paper-toolbar">
+                    <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
+                    <div>Comic Shop Babel</div>
+                    <!-- TODO: alinear a la derecha -->
+                    <div>&nbsp;&nbsp;&nbsp;Carrito</div>
+                </paper-toolbar>
+                <div class="subcategorie">
+                    <template is="dom-if" if="{{!isSelected}}">
+                        <h1>Bienvenido a Comic Shop Babel</h1>
+                    </template>
+                    <template is="dom-if" if="{{isSelected}}">
+                        <h1>Categoria {{selectedCategorie}}</h1>
+                        <template is="dom-repeat" items="{{subcategories}}" as="subcat">
+                            <div class="div-colection">
+                                <wc-colection>
+                                    <h3>{{subcat}}</h3></wc-colection>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </paper-header-panel>
+        </paper-drawer-panel>
     </template>
     <script>
-        (function() {
-            WCMenu = Polymer({
-                is: 'wc-menu',
-                properties: {
-                    categories: {
-                        type: Array,
-                        value: function() {
-                            return [];
-                        }
-                    },
-                    selectedCategorie: {
-                        type: String,
-                        value: ""
-                    },
+    (function() {
+        WCMenu = Polymer({
+            is: 'wc-menu',
+            properties: {
+                categories: {
+                    type: Array,
+                    value: function() {
+                        return [];
+                    }
                 },
-
-                ready: function() {
-                    // TODO cargar por defecto la primera categoria this.$.menu.selected = 0;
-                    //this.categories = ["DC", "Marvel", "Black"];
+                subcategories: {
+                    type: Array,
+                    value: function() {
+                        return [];
+                    }
                 },
-
-                onBtnTap: function(e) {
-                    e.stopPropagation();
-                    // console.log(Polymer.dom(this).children);
-                    this.$.menu.selected = e.target.id;
-                    this.selectedCategorie = e.target.value;
-                    // this.fire ('change', {title:this.title, time:e.target.value});
+                selectedCategorie: {
+                    type: String,
+                    value: ""
+                },
+                isSelected: {
+                    type: Boolean,
+                    value: false
                 }
-            });
-        })();
+            },
+            ready: function() {
+                // TODO cargar por defecto la primera categoria
+                // this.$.menu.selected = 0;
+                /*                this.categories = ["DC", "Marvel", "Black"];*/
+                // this.selectedCategorie = ["DC"];
+                // this.subcategories = ["Spiderman", "Batman", "Superman"];
+            },
+            isSelected: function() {
+                if (this.selectedCategorie === '') {
+                    return false;
+                } else return true;
+            },
+            onBtnTap: function(e) {
+                e.stopPropagation();
+                // console.log(Polymer.dom(this).children);
+                this.$.menu.selected = e.target.id;
+                this.selectedCategorie = e.target.value;
+                this.isSelected = true;
+                this.subcategories = ["Spiderman", "Batman", "Superman"];
+                // this.fire ('change', {title:this.title, time:e.target.value});
+            },
+            handleResponse: function(res, req, err) {
+                this.categories = res.detail.__data__.response.names;
+            }
+        });
+    })();
     </script>
 </dom-module>
