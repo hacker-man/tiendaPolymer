@@ -33,11 +33,32 @@
             background-color: grey;
             color: black;
             border-radius: 10px;
-            border-color: black;
+            border: 5px solid black;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+
+        }
+        .div-subcategorie{
+            padding: 20px;
+        }
+        .title-subcategorie{
+            /*text-align: center;
+            margin:20px;*/
         }
 
         .item-category {
             border: 2px solid black;
+        }
+        .title {
+            font-size: 20px !important;
+            font-weight: bold !important;
+            width: 100%;
+        }
+        .carrito{
+/*            width: 100%;
+            text-align: right;
+            padding: 20px;*/ 
         }
         </style>
         <iron-ajax auto url="/api/colec-name" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
@@ -57,11 +78,11 @@
             <paper-header-panel main>
                 <paper-toolbar class="div-paper-toolbar">
                     <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
-                    <div>Comic Shop Babel</div>
+                        <div class="title">Comic Shop Babel</div>
                     <!-- TODO: alinear a la derecha -->
-                    <div>&nbsp;&nbsp;&nbsp;Carrito</div>
+                        <div class="carrito">Carrito: {{numItemsCarrito}} items</div>
                 </paper-toolbar>
-                <div class="subcategorie">
+                <div class="div-subcategorie">
                     <template is="dom-if" if="{{!isSelected}}">
                         <h1>Bienvenido a Comic Shop Babel</h1>
                     </template>
@@ -69,8 +90,9 @@
                         <h1>Categoria {{selectedCategorie}}</h1>
                         <template is="dom-repeat" items="{{subcategories}}" as="subcat">
                             <div class="div-colection">
-                                <h3>{{subcat}}</h3>
-                                <wc-subcategories data={{subcat}}></wc-subcategories>
+                                <h1 class=>{{subcat}}</h1>
+                                    <wc-subcategories data={{subcat}}><span></span></wc-subcategories>
+                                <br>
                             </div>
                         </template>
                     </template>
@@ -102,6 +124,10 @@
                 isSelected: {
                     type: Boolean,
                     value: false
+                },
+                numItemsCarrito: {
+                    type: Number,
+                    value: 0
                 }
             },
             ready: function() {
@@ -128,6 +154,10 @@
             handleResponse: function(res, req, err) {
                 this.categories = res.detail.response.names;
             }
+            // Capturar evento de click item
+            // Añadir al array
+            // Cambiar numItemsCarrito
+            // Guardar local storage
         });
     })();
     </script>
