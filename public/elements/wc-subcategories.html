@@ -6,13 +6,22 @@
                 width: 150px;
                 vertical-align: text-bottom;
             }
+            .div-button{
+                display: inline-block;
+            }
         </style>
         <iron-ajax auto url="/api/colec-item?hero={{data}}" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
-        <button class="buttonMov" on-tap="moveSubTap" value="anterior"> ANTERIOR </button>
-        <template is="dom-repeat" items="{{items}}" as="item">
-            <wc-item data={{item}}></wc-item>
-        </template>
-        <button class="buttonMov" on-tap="moveSubTap" value="siguiente"> SIGUIENTE </button>
+        <div>
+            <div class="div-button">
+                <button class="buttonMov" on-tap="moveSubTap" value="anterior"> ANTERIOR </button>
+            </div>
+            <template is="dom-repeat" items="{{items}}" as="item">
+                <wc-item data={{item}}></wc-item>
+            </template>
+            <div class="div-button">
+                <button class="buttonMov" on-tap="moveSubTap" value="siguiente"> SIGUIENTE </button>
+            </div>
+        </div>
     </template>
     <script>
         (function() {
