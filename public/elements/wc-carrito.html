@@ -1,0 +1,43 @@
+<dom-module id="wc-carrito">
+  <template>
+    <style>
+      table{
+        margin: 0 auto;
+      }
+    </style>
+      <table border=1  cellspacing=0  width="45%">
+        <thead>
+            <tr>
+              <th colspan="3">
+                PRECIO TOTAL
+              </th>
+            </tr>
+            <tr>
+              <th>
+                Titulo
+              </th>
+              <th>
+                Precio
+              </th>
+            </tr>
+        </thead>
+        <tbody>
+          <template is="dom-repeat" items="{{itemsEnCarrito}}" as="item" >
+            <tr>
+              <td>
+                  {{item.nombre}}
+              </td>
+              <td>
+                  {{item.precio}}
+              </td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+  </template>
+  <script>
+    Polymer({
+      is:"wc-carrito"
+    });
+  </script>
+</dom-module>

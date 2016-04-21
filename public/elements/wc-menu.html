@@ -1,65 +1,72 @@
 <dom-module id="wc-menu">
     <template>
         <style is="custom-style">
-        paper-drawer-panel {
-            --paper-drawer-panel-main-container: {
-                background-color: rgb(184, 255, 184);
+            paper-drawer-panel {
+                --paper-drawer-panel-main-container: {
+                    background-color: rgb(184, 255, 184);
+                };
+                --paper-drawer-panel-left-drawer-container: {
+                    background-color: rgb(2, 158, 2);
+                };
+                --paper-drawer-panel-scrim: {
+                    background-color: rgb(184, 255, 184);
+                };
             }
-            ;
-            --paper-drawer-panel-left-drawer-container: {
-                background-color: rgb(2, 158, 2);
+
+            paper-menu {
+                --paper-menu-background-color: rgb(124, 247, 124);
+                padding: 0;
             }
-            ;
-            --paper-drawer-panel-scrim: {
-                background-color: rgb(184, 255, 184);
+
+            .div-paper-toolbar {
+                background-color: green;
+                border-bottom: 5px solid black;
+                color: black;
+                font-size: 20px;
+                font-weight: bold;
             }
-            ;
-        }
 
-        paper-menu {
-            --paper-menu-background-color: rgb(124, 247, 124);
-            padding: 0px;
-        }
+            .div-colection {
+                background-color: grey;
+                color: black;
+                border-radius: 10px;
+                border: 5px solid black;
+                padding: 20px;
+                margin-bottom: 20px;
+                text-align: center;
 
-        .div-paper-toolbar {
-            background-color: green;
-            border-bottom: 5px solid black;
-            color: black;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .div-colection {
-            background-color: grey;
-            color: black;
-            border-radius: 10px;
-            border: 5px solid black;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: center;
-
-        }
-        .div-subcategorie{
-            padding: 20px;
-        }
-        .title-subcategorie{
-            /*text-align: center;
+            }
+            .div-carrito{
+              background-color: #FFDEAD;
+              color: black;
+              border-radius: 10px;
+              border: 5px solid blue;
+              padding: 20px;
+              margin-bottom: 20px;
+              text-align: center;
+            }
+            .div-subcategorie {
+                padding: 20px;
+            }
+            .title-subcategorie {
+                /*text-align: center;
             margin:20px;*/
-        }
+            }
 
-        .item-category {
-            border: 2px solid black;
-        }
-        .title {
-            font-size: 20px !important;
-            font-weight: bold !important;
-            width: 100%;
-        }
-        .carrito{
-/*            width: 100%;
+            .item-category {
+                border: 2px solid black;
+            }
+            .title {
+                font-size: 20px !important;
+                font-weight: bold !important;
+                width: 100%;
+            }
+            .carrito {
+                /*            width: 100%;
             text-align: right;
-            padding: 20px;*/ 
-        }
+            padding: 20px;*/
+            }
+
         </style>
         <iron-ajax auto url="/api/colec-name" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
         <iron-ajax auto url="/api/colec-sub/?sub={{selectedCategorie}}" handle-as="json" on-response="handleSubcat" debounce-duration="300"></iron-ajax>
@@ -78,92 +85,112 @@
             <paper-header-panel main>
                 <paper-toolbar class="div-paper-toolbar">
                     <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
-                        <div class="title">Comic Shop Babel</div>
+                    <div class="title">Comic Shop Babel</div>
                     <!-- TODO: alinear a la derecha -->
-                        <div class="carrito">Carrito: {{numItemsCarrito}} items</div>
+                    <div on-tap="onCarrtap" class="carrito">Carrito:
+                        {{numItemsCarrito}}
+                        items</div>
                 </paper-toolbar>
-                <div class="div-subcategorie">
-                    <template is="dom-if" if="{{!isSelected}}">
-                        <h1>Bienvenido a Comic Shop Babel</h1>
-                    </template>
-                    <template is="dom-if" if="{{isSelected}}">
-                        <h1>Categoria {{selectedCategorie}}</h1>
-                        <template is="dom-repeat" items="{{subcategories}}" as="subcat">
-                            <div class="div-colection">
-                                <h1 class=>{{subcat}}</h1>
-                                    <wc-subcategories data={{subcat}}><span></span></wc-subcategories>
-                                <br>
-                            </div>
-                        </template>
-                    </template>
-                </div>
+                <template is="dom-if" if="{{subIsieSelected}}">
+                  <div class="div-subcategorie">
+                      <template is="dom-if" if="{{!isSelected}}">
+                          <h1>Bienvenido a Comic Shop Babel</h1>
+                      </template>
+                      <template is="dom-if" if="{{isSelected}}">
+                          <h1>Categoria{{selectedCategorie}}</h1>
+                          <template is="dom-repeat" items="{{subcategories}}" as="subcat">
+                              <div class="div-colection">
+                                  <h1 class=>{{subcat}}</h1>
+                                  <wc-subcategories data={{subcat}}>
+                                      <span></span>
+                                  </wc-subcategories>
+                                  <br>
+                              </div>
+                          </template>
+                      </template>
+                  </div>
+                </template>
+
+                <template is="dom-if" if="{{carritoSelected}}">
+                    <div class="div-carrito">
+                            <h1>Carrito</h1>
+                            <wc-carrito></wc-carrito>
+                    </div>
+                </template>
             </paper-header-panel>
         </paper-drawer-panel>
     </template>
     <script>
-    (function() {
-        WCMenu = Polymer({
-            is: 'wc-menu',
-            properties: {
-                categories: {
-                    type: Array,
-                    value: function() {
-                        return [];
+        (function() {
+            WCMenu = Polymer({
+                is: 'wc-menu',
+                properties: {
+                    categories: {
+                        type: Array,
+                        value: function() {
+                            return [];
+                        }
+                    },
+                    subcategories: {
+                        type: Array,
+                        value: function() {
+                            return [];
+                        }
+                    },
+                    selectedCategorie: {
+                        type: String,
+                        value: ""
+                    },
+                    carritoSelected: {
+                        type: Boolean,
+                        value: false
+                    },
+                    isSelected: {
+                        type: Boolean,
+                        value: false
+                    },
+                    subIsieSelected: {
+                        type: Boolean,
+                        value: true
+                    },
+                    numItemsCarrito: {
+                        type: Number,
+                        value: 0
                     }
                 },
-                subcategories: {
-                    type: Array,
-                    value: function() {
-                        return [];
-                    }
+                ready: function() {
+                    // TODO cargar por defecto la primera categoria this.$.menu.selected = 0;
+                    /*                this.categories = ["DC", "Marvel", "Black"];*/
+                    // this.selectedCategorie = ["DC"]; this.subcategories = ["Spiderman", "Batman", "Superman"];
                 },
-                selectedCategorie: {
-                    type: String,
-                    value: ""
+                onCarrtap: function(e) {
+                    e.stopPropagation();
+                    this.subIsieSelected = false;
+                    this.carritoSelected = true;
+                    console.log("Evento onCarrtap,carritoSelected", this.carritoSelected);
+                    console.log("Evento onCarrtap,subIsieSelected",this.subIsieSelected)
                 },
-                isSelected: {
-                    type: Boolean,
-                    value: false
+                onBtnTap: function(e) {
+                    e.stopPropagation();
+                    this.carritoSelected = false;
+                    this.subIsieSelected = true;
+                    console.log("Evento onBtnTap,carritoSelected", this.carritoSelected);
+                    console.log("Evento onBtnTap,subIsieSelected",this.subIsieSelected)
+                    this.isSelected = true;
+                    this.$.menu.selected = e.target.id;
+                    this.selectedCategorie = e.target.value;
+                    //this.subcategories = ["Spiderman", "Batman", "Superman"]; this.fire ('change', {title:this.title, time:e.target.value});
                 },
-                numItemsCarrito: {
-                    type: Number,
-                    value: 0
+                handleResponse: function(res, req, err) {
+                    this.categories = res.detail.response.names;
+                },
+                handleSubcat: function(res, req, err) {
+                    this.subcategories = res.detail.response.subcategories;
+                    console.log("subcategories", this.subcategories);
+                    console.log("selectedsubcat", this.selectedCategorie);
                 }
-            },
-            ready: function() {
-                // TODO cargar por defecto la primera categoria
-                // this.$.menu.selected = 0;
-                /*                this.categories = ["DC", "Marvel", "Black"];*/
-                // this.selectedCategorie = ["DC"];
-                // this.subcategories = ["Spiderman", "Batman", "Superman"];
-            },
-            isSelected: function() {
-                if (this.selectedCategorie === '') {
-                    return false;
-                } else return true;
-            },
-            onBtnTap: function(e) {
-                e.stopPropagation();
-                // console.log(Polymer.dom(this).children);
-                this.$.menu.selected = e.target.id;
-                this.selectedCategorie = e.target.value;
-                this.isSelected = true;
-                //this.subcategories = ["Spiderman", "Batman", "Superman"];
-                // this.fire ('change', {title:this.title, time:e.target.value});
-            },
-            handleResponse: function(res, req, err) {
-                this.categories = res.detail.response.names;
-            },
-            handleSubcat: function(res,req,err){
-              this.subcategories = res.detail.response.subcategories;
-              console.log("subcategories",this.subcategories);
-              console.log("selectedsubcat",this.selectedCategorie);
-            }
-            // Capturar evento de click item
-            // Añadir al array
-            // Cambiar numItemsCarrito
-            // Guardar local storage
-        });
-    })();
+                // Capturar evento de click item Añadir al array Cambiar numItemsCarrito Guardar local storage
+            });
+        })();
     </script>
 </dom-module>
