@@ -18,47 +18,191 @@ router.get('/colec-name', function(req, res, next) {
     });
 });
 router.get('/colec-sub', function(req, res, next) {
-  //DC,Marvel,DarkHorse
-  switch (req.query.sub) {
-    case "DC":
-    res.status(200).json({
-        subcateories: ["Superman", "Batman", "Flash"]
-    });
-    break;
-    case "Marvel":
-    res.status(200).json({
-        subcateories: ["Spiderman", "Batman", "Spawn"]
-    });
-    break;
-    case "DarkHorse":
-    res.status(200).json({
-        subcateories: ["Spawn", "Sin City", "HellBoy"]
-    });
-    break;
-    default:  res.status(404).json({
-          result: "No existe esa categoría"
-      });
+    //DC,Marvel,DarkHorse
+    switch (req.query.sub) {
+        case "DC":
+            res.status(200).json({
+                subcategories: ["Superman", "Batman", "Flash"]
+            });
+            break;
+        case "Marvel":
+            res.status(200).json({
+                subcategories: ["Spiderman", "Fantastic 4", "Deadpool"]
+            });
+            break;
+        case "DarkHorse":
+            res.status(200).json({
+                subcategories: ["Spawn", "Sin City", "HellBoy"]
+            });
+            break;
+        case "":
+            res.status(200).json({
+                subcategories: []
+            });
+            break;
+        default:
+            res.status(404).json({
+                subcategories: "No existe esa categoría"
+            });
 
-  }
+    }
 
 });
 router.get('/colec-item', function(req, res, next) {
 
-    res.status(200).json({
-        itemSpiderman: [{
-            "nombre": "Spiderman 3",
-            "precio": 10
 
-        },
-      {
-        "nombre": "Spiderman 6",
-        "precio": 10
-      },{
-        "nombre": "Spiderman 7",
-        "precio": 7.5
-      }]
+    switch (req.query.hero) {
+        case "Superman":
+            res.status(200).json({
+                items: [{
+                    "nombre": "Superman 1",
+                    "precio": 8
 
-    });
+                }, {
+                    "nombre": "Superman 2",
+                    "precio": 8.5
+                }, {
+                    "nombre": "Superman 3",
+                    "precio": 7.5
+                }]
+
+            });
+
+            break;
+        case "Batman":
+            res.status(200).json({
+                items: [{
+                    "nombre": "Batman 1",
+                    "precio": 8
+
+                }, {
+                    "nombre": "Batman 2",
+                    "precio": 8.5
+                }, {
+                    "nombre": "Batman 3",
+                    "precio": 7.5
+                }]
+
+            });
+            break;
+        case "Flash":
+            res.status(200).json({
+                items: [{
+                    "nombre": "Flash 1",
+                    "precio": 8
+
+                }, {
+                    "nombre": "Flash 2",
+                    "precio": 8.5
+                }, {
+                    "nombre": "Flash 3",
+                    "precio": 7.5
+                }]
+
+            });
+            break;
+        case "Spawn":
+            res.status(200).json({
+                items: [{
+                    "nombre": "Spawn 1",
+                    "precio": 8
+
+                }, {
+                    "nombre": "Spawn 2",
+                    "precio": 8.5
+                }, {
+                    "nombre": "Spawn 3",
+                    "precio": 7.5
+                }]
+
+            });
+            break;
+        case "Sin City":
+        res.status(200).json({
+            items: [{
+                "nombre": "Sin City 1",
+                "precio": 8
+
+            }, {
+                "nombre": "Sin City 2",
+                "precio": 8.5
+            }, {
+                "nombre": "Sin City 3",
+                "precio": 7.5
+            }]
+
+        });
+            break;
+        case "HellBoy":
+        res.status(200).json({
+            items: [{
+                "nombre": "HellBoy 1",
+                "precio": 8
+
+            }, {
+                "nombre": "HellBoy 2",
+                "precio": 8.5
+            }, {
+                "nombre": "HellBoy 3",
+                "precio": 7.5
+            }]
+
+        });
+            break;
+        case "Spiderman":
+            res.status(200).json({
+                items: [{
+                    "nombre": "Spiderman 3",
+                    "precio": 10
+
+                }, {
+                    "nombre": "Spiderman 6",
+                    "precio": 10
+                }, {
+                    "nombre": "Spiderman 7",
+                    "precio": 7.5
+                }]
+
+            });
+            break;
+        case "Fantastic 4":
+        res.status(200).json({
+            items: [{
+                "nombre": "Fantastic 4 nº1",
+                "precio": 8
+
+            }, {
+                "nombre": "Fantastic 4 nº2",
+                "precio": 8.5
+            }, {
+                "nombre": "Fantastic 4 nº3",
+                "precio": 7.5
+            }]
+
+        });
+            break;
+        case "Deadpool":
+        res.status(200).json({
+            items: [{
+                "nombre": "Deadpool 1",
+                "precio": 8
+
+            }, {
+                "nombre": "Deadpool 2",
+                "precio": 8.5
+            }, {
+                "nombre": "Deadpool 3",
+                "precio": 7.5
+            }]
+
+        });
+            break;
+        default:  res.status(404).json({
+              items: "No existen estos comics"
+          });
+
+    }
+
 });
 router.get('/users', function(req, res, next) {
     var sort = req.query.sort || 'nickname';

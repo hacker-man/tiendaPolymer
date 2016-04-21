@@ -41,7 +41,7 @@
         }
         </style>
         <iron-ajax auto url="/api/colec-name" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
-        <iron-ajax auto url="/api/colec-name/?sub={{selectedCategorie}}" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
+        <iron-ajax auto url="/api/colec-sub/?sub={{selectedCategorie}}" handle-as="json" on-response="handleSubcat" debounce-duration="300"></iron-ajax>
 
         <paper-drawer-panel>
             <paper-header-panel drawer>
@@ -122,11 +122,16 @@
                 this.$.menu.selected = e.target.id;
                 this.selectedCategorie = e.target.value;
                 this.isSelected = true;
-                this.subcategories = ["Spiderman", "Batman", "Superman"];
+                //this.subcategories = ["Spiderman", "Batman", "Superman"];
                 // this.fire ('change', {title:this.title, time:e.target.value});
             },
             handleResponse: function(res, req, err) {
                 this.categories = res.detail.response.names;
+            },
+            handleSubcat: function(res,req,err){
+              this.subcategories = res.detail.response.subcategories;
+              console.log("subcategories",this.subcategories);
+              console.log("selectedsubcat",this.selectedCategorie);
             }
         });
     })();
