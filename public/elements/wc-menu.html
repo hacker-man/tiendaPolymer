@@ -26,7 +26,7 @@
             border-bottom: 5px solid black;
             color: black;
             font-size: 20px;
-            font-weight: bold;
+            font-weight: bold;            
         }
 
         .div-colection {
@@ -76,7 +76,7 @@
                     </template>
                 </paper-menu>
             </paper-header-panel>
-            <paper-header-panel main>
+            <paper-header-panel main id="panelheader">
                 <paper-toolbar class="div-paper-toolbar">
                     <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
                         <div class="title">Comic Shop Babel</div>
@@ -147,6 +147,8 @@
                     window.localStorage['carrito'] = JSON.stringify(this.itemsCarrito);
                     console.log("Local", JSON.parse(window.localStorage['carrito']));
                 });
+                this.$.panelheader.parentNode.style.overflow = "scroll";
+                this.$.panelheader.parentNode.style.overflowX = "hidden";
 
                 this.addEventListener("moveSubcolection", function(e) {
                     // TODO: mover el carrosel
