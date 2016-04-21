@@ -1,10 +1,18 @@
 <dom-module id="wc-subcategories">
     <template>
-        <style></style>
+        <style>
+            .buttonMov{
+                height: 50px;
+                width: 150px;
+                vertical-align: text-bottom;
+            }
+        </style>
         <iron-ajax auto url="/api/colec-item?hero={{data}}" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
+        <button class="buttonMov"> ANTERIOR </button>
         <template is="dom-repeat" items="{{items}}" as="item">
             <wc-item data={{item}}></wc-item>
         </template>
+        <button class="buttonMov"> SIGUIENTE </button>
     </template>
     <script>
         (function() {

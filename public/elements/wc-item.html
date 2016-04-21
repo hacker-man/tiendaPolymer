@@ -15,39 +15,25 @@
                 --iron-icon-height: 16px;
                 color: var(--paper-amber-500);
             }
+            .card-actions{
+                border-top: 3px solid black;
+            }
+            paper-card{
+                border: 3px solid black;
+                border-radius: 3px;
+                margin:20px;
+            }
 
         </style> 
-<!--     <iron-ajax
-    auto url="/api/colec-item"
-    handle-as="json"
-    on-response="handleResponse"
-    debounce-duration="300">
-    </iron-ajax>
-    <div class="wrapper">
-        <template is="dom-repeat" items="{{items}}" as="item">
-            <paper-card heading="Emmental" image="http://placehold.it/350x150/FFC107/000000">
-                <div class="card-content">
-                    <div class="film-header">{{item.nombre}}</div>
-                    <p>Precio: {{item.precio}} &euro;</p>
-                </div>
-                <div class="card-actions">
-                    <paper-button>Añadir Carrito</paper-button>
-                </div>
-            </paper-card>
-        </template>
-    </div> -->
-<!--        <div class="wrapper"> -->
            <paper-card heading="Emmental" image="http://placehold.it/350x150/FFC107/000000">
                 <div class="card-content">
                     <div class="film-header">{{data.nombre}}</div>
                     <p>Precio: {{data.precio}} &euro;</p>
                 </div>
                 <div class="card-actions">
-                    <paper-button>Añadir Carrito</paper-button>
+                    <paper-button on-tap="onItemTap" value={{data}}>Añadir Carrito</paper-button>
                 </div>
-            </paper-card>
-<!--        </div> -->
-        
+            </paper-card>        
     </template>
 <script>
     (function() {
@@ -63,6 +49,11 @@
             },
             ready: function() {
                 console.log(this.data);
+            },
+            onItemTap: function(e) {
+                e.stopPropagation();
+                console.log("Click", e.target.value);
+                // this.fire ('change', {title:this.title, time:e.target.value});
             },
 /*            handleResponse: function(res, req, err) {
                 this.items = res.detail.response.itemSpiderman;
