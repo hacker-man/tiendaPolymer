@@ -128,9 +128,30 @@
                 numItemsCarrito: {
                     type: Number,
                     value: 0
+                },
+                itemsCarrito: {
+                    type: Array,
+                    value: function(){
+                        return [];
+                    }
                 }
             },
             ready: function() {
+                // this.itemsCarrito = window.localStorage.getItem("Carrito");
+                console.log("Local", window.localStorage.getItem("Carrito"));
+                this.addEventListener("itemBuy", function(e) {
+/*                    console.log("Estoy en menu", e.detail);*/
+                    this.itemsCarrito.push(e.detail);
+                    this.numItemsCarrito = this.itemsCarrito.length;
+/*                    console.log(this.itemsCarrito);*/
+                    window.localStorage.setItem("Carrito", this.itemsCarrito);
+                    console.log("Local", window.localStorage.getItem("Carrito"));
+/*                    var arr = window.localStorage.getItem("Carrito");
+                    console.log(typeof(window.localStorage.getItem("Carrito")), typeof(arr));*/
+/*                    arr.forEach(function(a){
+                        console.log(a);
+                    });*/
+                });
                 // TODO cargar por defecto la primera categoria
                 // this.$.menu.selected = 0;
                 /*                this.categories = ["DC", "Marvel", "Black"];*/
@@ -158,7 +179,7 @@
               this.subcategories = res.detail.response.subcategories;
               console.log("subcategories",this.subcategories);
               console.log("selectedsubcat",this.selectedCategorie);
-            }
+            },
             // Capturar evento de click item
             // Añadir al array
             // Cambiar numItemsCarrito
