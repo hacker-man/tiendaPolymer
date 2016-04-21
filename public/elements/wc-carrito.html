@@ -9,7 +9,7 @@
         <thead>
             <tr>
               <th colspan="3">
-                PRECIO TOTAL
+                PRECIO TOTAL {{total}}
               </th>
             </tr>
             <tr>
@@ -45,8 +45,15 @@
             return [];
           }
         },
+        total: {
+          type: Number,
+          value: 0
+        },
         ready: function() {
           console.log(this.data);
+          data.foreach(item, function (){
+            this.total = this.total + item.precio;
+          });
         },
       }
     });
