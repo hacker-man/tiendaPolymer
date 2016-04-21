@@ -22,11 +22,11 @@
         }
 
         .div-paper-toolbar {
-            background-color: green;
+            background-color: #039003;
             border-bottom: 5px solid black;
             color: black;
             font-size: 20px;
-            font-weight: bold;
+            font-weight: bold;            
         }
 
         .div-colection {
@@ -56,10 +56,11 @@
             width: 100%;
         }
         .carrito{
-/*            width: 100%;
-            text-align: right;
-            padding: 20px;*/ 
+            background-color: rgb(124, 247, 124);
+            padding: 10px;
+            border-radius: 10px;
         }
+
         </style>
         <iron-ajax auto url="/api/colec-name" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
         <iron-ajax auto url="/api/colec-sub/?sub={{selectedCategorie}}" handle-as="json" on-response="handleSubcat" debounce-duration="300"></iron-ajax>
@@ -75,11 +76,10 @@
                     </template>
                 </paper-menu>
             </paper-header-panel>
-            <paper-header-panel main>
+            <paper-header-panel main id="panelheader">
                 <paper-toolbar class="div-paper-toolbar">
                     <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
                         <div class="title">Comic Shop Babel</div>
-                    <!-- TODO: alinear a la derecha -->
                         <div class="carrito">Carrito: {{numItemsCarrito}} items</div>
                 </paper-toolbar>
                 <div class="div-subcategorie">
@@ -97,6 +97,8 @@
                         </template>
                     </template>
                 </div>
+                <!-- LOGIN
+                CARRITO -->
             </paper-header-panel>
         </paper-drawer-panel>
     </template>
@@ -128,27 +130,43 @@
                 numItemsCarrito: {
                     type: Number,
                     value: 0
+                },
+                itemsCarrito: {
+                    type: Array,
+                    value: function(){
+                        return [];
+                    }
                 }
             },
             ready: function() {
-                // TODO cargar por defecto la primera categoria
-                // this.$.menu.selected = 0;
-                /*                this.categories = ["DC", "Marvel", "Black"];*/
-                // this.selectedCategorie = ["DC"];
-                // this.subcategories = ["Spiderman", "Batman", "Superman"];
+
+                // MANTENER EN LA VENTANA ->this.itemsCarrito = JSON.parse(window.localStorage['carrito']);
+                this.addEventListener("itemBuy", function(e) {
+                    this.itemsCarrito.push(e.detail);
+                    this.numItemsCarrito = this.itemsCarrito.length;
+                    window.localStorage['carrito'] = JSON.stringify(this.itemsCarrito);
+                    console.log("Local", JSON.parse(window.localStorage['carrito']));
+                });
+                this.$.panelheader.parentNode.style.overflow = "scroll";
+                this.$.panelheader.parentNode.style.overflowX = "hidden";
+
+                this.addEventListener("moveSubcolection", function(e) {
+                    // TODO: mover el carrosel
+                    // e.detail.accion contiene la accion a realizar
+                    // e.detail.subcolection contiene la subcolection a mover
+                    console.log("moveSubcolection", e.detail);
+                });
             },
-            isSelected: function() {
+/*            isSelected: function() {
                 if (this.selectedCategorie === '') {
                     return false;
                 } else return true;
-            },
+            },*/
             onBtnTap: function(e) {
                 e.stopPropagation();
-                // console.log(Polymer.dom(this).children);
                 this.$.menu.selected = e.target.id;
                 this.selectedCategorie = e.target.value;
                 this.isSelected = true;
-                //this.subcategories = ["Spiderman", "Batman", "Superman"];
                 // this.fire ('change', {title:this.title, time:e.target.value});
             },
             handleResponse: function(res, req, err) {
@@ -156,13 +174,9 @@
             },
             handleSubcat: function(res,req,err){
               this.subcategories = res.detail.response.subcategories;
-              console.log("subcategories",this.subcategories);
-              console.log("selectedsubcat",this.selectedCategorie);
-            }
-            // Capturar evento de click item
-            // Añadir al array
-            // Cambiar numItemsCarrito
-            // Guardar local storage
+/*              console.log("subcategories",this.subcategories);
+              console.log("selectedsubcat",this.selectedCategorie);*/
+            },
         });
     })();
     </script>

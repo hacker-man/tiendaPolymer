@@ -48,12 +48,11 @@
                 }
             },
             ready: function() {
-                console.log(this.data);
+                // console.log(this.data);
             },
             onItemTap: function(e) {
                 e.stopPropagation();
-                console.log("Click", e.target.value);
-                // this.fire ('change', {title:this.title, time:e.target.value});
+                this.fire ('itemBuy', e.target.value);
             },
 /*            handleResponse: function(res, req, err) {
                 this.items = res.detail.response.itemSpiderman;
