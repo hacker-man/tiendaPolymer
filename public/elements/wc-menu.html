@@ -40,10 +40,11 @@
         }
         
         .div-carrito {
-            background-color: #FFDEAD;
+            margin: 20px;
+            background-color: #7CF77C;
             color: black;
             border-radius: 10px;
-            border: 5px solid blue;
+            border: 5px solid black;
             padding: 20px;
             margin-bottom: 20px;
             text-align: center;
@@ -168,7 +169,10 @@
             },
             ready: function() {
 
-                // MANTENER EN LA VENTANA ->this.itemsCarrito = JSON.parse(window.localStorage['carrito']);
+                // MANTENER EN LA VENTANA ->
+                // this.itemsCarrito = JSON.parse(window.localStorage['carrito']);
+                // this.numItemsCarrito = this.itemsCarrito.length;
+
                 this.addEventListener("itemBuy", function(e) {
                     this.itemsCarrito.push(e.detail);
                     this.numItemsCarrito = this.itemsCarrito.length;
