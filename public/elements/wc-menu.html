@@ -41,7 +41,7 @@
 
         .div-carrito {
             margin: 20px;
-            background-color: #7CF77C;
+            background-color: #70FF70;
             color: black;
             border-radius: 10px;
             border: 5px solid black;
@@ -158,13 +158,15 @@
                 },
                 numItemsCarrito: {
                     type: Number,
-                    value: 0
+                    value: 0,
+                    notify: true
                 },
                 itemsCarrito: {
                     type: Array,
                     value: function(){
                         return [];
-                    }
+                    },
+                    notify: true
                 }
             },
             ready: function() {
@@ -177,7 +179,7 @@
                     this.itemsCarrito.push(e.detail);
                     this.numItemsCarrito = this.itemsCarrito.length;
                     window.localStorage['carrito'] = JSON.stringify(this.itemsCarrito);
-                    console.log("Local", JSON.parse(window.localStorage['carrito']));
+                    // console.log("Local", JSON.parse(window.localStorage['carrito']));
                 });
                 this.$.panelheader.parentNode.style.overflow = "scroll";
                 this.$.panelheader.parentNode.style.overflowX = "hidden";
@@ -186,22 +188,22 @@
                     // TODO: mover el carrosel
                     // e.detail.accion contiene la accion a realizar
                     // e.detail.subcolection contiene la subcolection a mover
-                    console.log("moveSubcolection", e.detail);
+                    // console.log("moveSubcolection", e.detail);
                 });
             },
             onCarrtap: function(e) {
                 e.stopPropagation();
                 this.subIsieSelected = false;
                 this.carritoSelected = true;
-                console.log("Evento onCarrtap,carritoSelected", this.carritoSelected);
-                console.log("Evento onCarrtap,subIsieSelected", this.subIsieSelected)
+                // console.log("Evento onCarrtap,carritoSelected", this.carritoSelected);
+                // console.log("Evento onCarrtap,subIsieSelected", this.subIsieSelected);
             },
             onBtnTap: function(e) {
                 e.stopPropagation();
                 this.carritoSelected = false;
                 this.subIsieSelected = true;
-                console.log("Evento onBtnTap,carritoSelected", this.carritoSelected);
-                console.log("Evento onBtnTap,subIsieSelected", this.subIsieSelected)
+                // console.log("Evento onBtnTap,carritoSelected", this.carritoSelected);
+                // console.log("Evento onBtnTap,subIsieSelected", this.subIsieSelected);
                 this.isSelected = true;
                 this.$.menu.selected = e.target.id;
                 this.selectedCategorie = e.target.value;
@@ -212,8 +214,8 @@
             },
             handleSubcat: function(res, req, err) {
                 this.subcategories = res.detail.response.subcategories;
-                console.log("subcategories", this.subcategories);
-                console.log("selectedsubcat", this.selectedCategorie);
+                // console.log("subcategories", this.subcategories);
+                // console.log("selectedsubcat", this.selectedCategorie);
             }
         })
 

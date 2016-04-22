@@ -2,27 +2,41 @@
   <template>
     <style>
       table{
-        background-color: green;
         margin: 0 auto;
+        border-radius: 10px;
+        border: 3px solid black;
+        background-color: green;
+      }
+      .total{
+        color: white;
+        padding: 20px;
+        font-size: 30px;
+        border-radius: 10px 10px 0px 0px;
+      }
+      .class{
+        background-color: #7CF77C;
+      }
+      .sec{
+        background-color: #7CF77C;
       }
     </style>
       <table border=1  cellspacing=0  width="45%">
         <thead>
-            <tr class="total">
-              <th colspan="3">
-                PRECIO TOTAL {{total}}
+            <tr>
+              <th class="total" colspan="3">
+                PRECIO TOTAL: {{total}}€.
               </th>
             </tr>
-            <tr class="secciones">
-              <th>
+            <tr class="sec">
+              <th class="seccion">
                 Titulo
               </th>
-              <th>
+              <th class="seccion">
                 Precio
               </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="class">
           <template is="dom-repeat" items="{{data}}" as="item" >
             <tr>
               <td>
@@ -44,18 +58,22 @@
           type: Array,
           value: function(){
             return [];
-          }
+          },
+          notify: true
         },
         total: {
           type: Number,
-          value: 0
+          value: 0,
+          notify: true
         },
-        ready: function() {
-          console.log(this.data);
-          data.foreach(item, function (){
-            this.total = this.total + item.precio;
-          });
-        },
+      },
+      ready: function() {
+        console.log(this.data);
+        var total = 0;
+        this.data.forEach(function(item){
+          total = total + item.precio;
+        });
+        this.total = total;
       }
     });
   </script>
