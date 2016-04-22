@@ -1,62 +1,81 @@
 <dom-module id="wc-carrito">
-  <template>
-    <style>
-      table{
-        background-color: green;
-        margin: 0 auto;
-      }
-    </style>
-      <table border=1  cellspacing=0  width="45%">
-        <thead>
-            <tr class="total">
-              <th colspan="3">
-                PRECIO TOTAL {{total}}
-              </th>
-            </tr>
-            <tr class="secciones">
-              <th>
-                Titulo
-              </th>
-              <th>
-                Precio
-              </th>
-            </tr>
-        </thead>
-        <tbody>
-          <template is="dom-repeat" items="{{data}}" as="item" >
-            <tr>
-              <td>
-                  {{item.nombre}}
-              </td>
-              <td>
-                  {{item.precio}}
-              </td>
-            </tr>
-          </template>
-        </tbody>
-      </table>
-  </template>
-  <script>
-    Polymer({
-      is:"wc-carrito",
-      properties:{
-        data: {
-          type: Array,
-          value: function(){
-            return [];
-          }
-        },
-        total: {
-          type: Number,
-          value: 0
-        },
-        ready: function() {
-          console.log(this.data);
-          data.foreach(item, function (){
-            this.total = this.total + item.precio;
-          });
-        },
-      }
-    });
-  </script>
+    <template>
+        <style>
+            table {
+                background-color: green;
+                margin: 0 auto;
+            }
+            
+            button {
+                padding: 5px;
+                background: green;
+                margin-top: 10px;
+                color: white;
+                font-weight: bold;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+        </style>
+        <table border=1 cellspacing=0 width="45%">
+            <thead>
+                <tr class="total">
+                    <th colspan="3">
+                        PRECIO TOTAL {{total}}
+                    </th>
+                </tr>
+                <tr class="secciones">
+                    <th>
+                        Titulo
+                    </th>
+                    <th>
+                        Precio
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <template is="dom-repeat" items="{{data}}" as="item">
+                    <tr>
+                        <td>
+                            {{item.nombre}}
+                        </td>
+                        <td>
+                            {{item.precio}}
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <button on-tap="tapBuy">Comprar</button>
+    </template>
+
+    <script>
+        Polymer({
+            is: "wc-carrito",
+            properties: {
+                data: {
+                    type: Array,
+                    value: function () {
+                        return [];
+                    },
+                    notify:true
+                },
+                total: {
+                    type: Number,
+                    value: 0
+                },
+                numItems: {
+                    type: Number,
+                    value: 0,
+                    notify:true
+                }
+            },
+           
+            tapBuy: function () {
+                console.log("Compra realizada");
+                this.numItems = 0;
+                this.data = [];
+            }
+
+        });
+    </script>
 </dom-module>
