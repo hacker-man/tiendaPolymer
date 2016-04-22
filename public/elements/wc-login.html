@@ -1,0 +1,41 @@
+<dom-module id="wc-login">
+    <template>
+        <style>
+
+        </style> 
+           <paper-card heading="Emmental" image="http://placehold.it/350x150/7CF77C/000000">
+                <div class="card-content">
+                    <div class="film-header">Nombre: <input type="text" value={{nombre}}></input></div>
+                    <div class="film-header">Password: <input type="password" value={{pass}}></input></div>
+                </div>
+                <div class="card-actions" on-tap="onLoginTap">
+                    <paper-button >Login</paper-button>
+                </div>
+            </paper-card>        
+    </template>
+<script>
+    (function() {
+        WCLogin = Polymer({
+            is: 'wc-login',
+            properties: {
+                 nombre: {
+                    type: String,
+                    value: "Jesus"
+                },
+                pass: {
+                    type: String,
+                    value: "asdasd"
+                }
+            },
+            ready: function() {
+                // console.log(this.data);
+            },
+            onLoginTap: function(e) {
+                e.stopPropagation();
+                console.log("click en log");
+                this.fire ('logeado', e.target.value);
+            },
+        });
+    })();
+</script>
+</dom-module>

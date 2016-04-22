@@ -89,7 +89,9 @@
         ready: function() {},
         tapBuy: function(e) {
           e.stopPropagation();
-          this.fire ('buyAll', {evento: e});
+          // if (this.data.length !== 0){
+            this.fire ('buyAll', {evento: e});
+          // }
         }
     });
     </script>
