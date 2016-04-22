@@ -1,132 +1,90 @@
 <dom-module id="wc-menu">
     <template>
         <style is="custom-style">
-            paper-drawer-panel {
-                --paper-drawer-panel-main-container: {
-                    background-color: rgb(184, 255, 184);
-                }
-                ;
-                --paper-drawer-panel-left-drawer-container: {
-                    background-color: rgb(2, 158, 2);
-                }
-                ;
-                --paper-drawer-panel-scrim: {
-                    background-color: rgb(184, 255, 184);
-                }
-                ;
+        paper-drawer-panel {
+            --paper-drawer-panel-main-container: {
+                background-color: rgb(184, 255, 184);
             }
-            
-            paper-menu {
-                --paper-menu-background-color: rgb(124, 247, 124);
-                padding: 0;
+            ;
+            --paper-drawer-panel-left-drawer-container: {
+                background-color: rgb(2, 158, 2);
             }
-            
-            .div-paper-toolbar {
-                background-color: #039003;
-                border-bottom: 5px solid black;
-                color: black;
-                font-size: 20px;
-                font-weight: bold;
+            ;
+            --paper-drawer-panel-scrim: {
+                background-color: rgb(184, 255, 184);
             }
-            
-            .div-colection {
-                background-color: grey;
-                color: black;
-                border-radius: 10px;
-                border: 5px solid black;
-                padding: 20px;
-                margin-bottom: 20px;
-                text-align: center;
-            }
-            
-            .div-carrito {
-                margin: 20px;
-                background-color: #70FF70;
-                color: black;
-                border-radius: 10px;
-                border: 5px solid black;
-                padding: 20px;
-                margin-bottom: 20px;
-                text-align: center;
-            }
-            
-            .div-subcategorie {
-                padding: 20px;
-            }
-            
-            .title-subcategorie {
-                /*text-align: center;
-            margin:20px;*/
-            }
-            
-            .item-category {
-                border: 2px solid black;
-            }
-            
-            .title {
-                font-size: 20px !important;
-                font-weight: bold !important;
-                width: 100%;
-            }
-            
-            .div-colection {
-                background-color: grey;
-                color: black;
-                border-radius: 10px;
-                border: 5px solid black;
-                padding: 20px;
-                margin-bottom: 20px;
-                text-align: center;
-            }
-            
-            .div-carrito {
-                margin: 20px;
-                background-color: #7CF77C;
-                color: black;
-                border-radius: 10px;
-                border: 5px solid black;
-                padding: 20px;
-                margin-bottom: 20px;
-                text-align: center;
-            }
-            
-            .div-subcategorie {
-                padding: 20px;
-            }
-            
-            .title-subcategorie {
-                /*text-align: center;
-            margin:20px;*/
-            }
-            
-            .item-category {
-                border: 2px solid black;
-            }
-            
-            .title {
-                font-size: 20px !important;
-                font-weight: bold !important;
-                width: 100%;
-            }
-            
-            .carrito {
-                background-color: rgb(124, 247, 124);
-                padding: 10px;
-                border-radius: 10px;
-                cursor: pointer;
-            }
-            
-            .categorie1 {
-                cursor: pointer;
-            }
-            
-            h1 {
-                font-size: 38px;
-                font-style: italic;
-                color: #333;
-                padding: 10px;
-                text-shadow: -1px -1px 0px #101010, 1px 1px 0px #505050;
-            }
+            ;
+        }
+        
+        paper-menu {
+            --paper-menu-background-color: rgb(124, 247, 124);
+            padding: 0;
+        }
+        
+        .div-paper-toolbar {
+            background-color: #039003;
+            border-bottom: 5px solid black;
+            color: black;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .div-colection {
+            background-color: grey;
+            color: black;
+            border-radius: 10px;
+            border: 5px solid black;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .div-carrito {
+            margin: 20px;
+            background-color: #70FF70;
+            color: black;
+            border-radius: 10px;
+            border: 5px solid black;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .div-subcategorie {
+            padding: 20px;
+        }
+        
+        .title {
+            font-size: 20px !important;
+            font-weight: bold !important;
+            width: 100%;
+        }
+        
+        .item-category {
+            cursor: pointer;
+            border: 2px solid black;
+        }
+        
+        .title {
+            font-size: 20px !important;
+            font-weight: bold !important;
+            width: 100%;
+        }
+        
+        .carrito {
+            background-color: rgb(124, 247, 124);
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        
+        h1 {
+            font-size: 38px;
+            font-style: italic;
+            color: #333;
+            padding: 10px;
+            text-shadow: -1px -1px 0px #101010, 1px 1px 0px #505050;
+        }
         </style>
         <iron-ajax auto url="/api/colec-name" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
         <iron-ajax auto url="/api/colec-sub/?sub={{selectedCategorie}}" handle-as="json" on-response="handleSubcat" debounce-duration="300"></iron-ajax>
@@ -137,7 +95,7 @@
                 </paper-toolbar>
                 <paper-menu id="menu">
                     <template is="dom-repeat" items="{{categories}}" as="categorie">
-                        <paper-item class="categorie1" class="item-category" on-tap="onBtnTap" id="{{index}}" value={{categorie}}>{{categorie}}</paper-item>
+                        <paper-item class="item-category" on-tap="onBtnTap" id="{{index}}" value={{categorie}}>{{categorie}}</paper-item>
                     </template>
                 </paper-menu>
             </paper-header-panel>
@@ -177,123 +135,122 @@
         </paper-drawer-panel>
     </template>
     <script>
-        (function () {
-                WCMenu = Polymer({
-                        is: 'wc-menu',
-                        properties: {
-                            categories: {
-                                type: Array,
-                                value: function () {
-                                    return [];
-                                }
-                            },
-                            subcategories: {
-                                type: Array,
-                                value: function () {
-                                    return [];
-                                }
-                            },
-                            selectedCategorie: {
-                                type: String,
-                                value: ""
-                            },
-                            carritoSelected: {
-                                type: Boolean,
-                                value: false
-                            },
-                            isSelected: {
-                                type: Boolean,
-                                value: false
-                            },
-                            subIsieSelected: {
-                                type: Boolean,
-                                value: true
-                            },
-                            numItemsCarrito: {
-                                type: Number,
-                                value: 0
-                            },
-                            itemsCarrito: {
-                                type: Array,
-                                value: function () {
-                                    return [];
-                                }
-                            }
-                        },
+    (function() {
+        WCMenu = Polymer({
+            is: 'wc-menu',
+            properties: {
+                categories: {
+                    type: Array,
+                    value: function() {
+                        return [];
+                    }
+                },
+                subcategories: {
+                    type: Array,
+                    value: function() {
+                        return [];
+                    }
+                },
+                selectedCategorie: {
+                    type: String,
+                    value: ""
+                },
+                carritoSelected: {
+                    type: Boolean,
+                    value: false
+                },
+                isSelected: {
+                    type: Boolean,
+                    value: false
+                },
+                subIsieSelected: {
+                    type: Boolean,
+                    value: true
+                },
+                numItemsCarrito: {
+                    type: Number,
+                    value: 0
+                },
+                itemsCarrito: {
+                    type: Array,
+                    value: function() {
+                        return [];
+                    }
+                }
+            },
 
-                    ready: function(){
+            ready: function() {
 
-                        // BORRAR LOCALSTORAGE
-                        // window.localStorage['carrito'] = JSON.stringify(this.data);
+                // BORRAR LOCALSTORAGE
+                // window.localStorage['carrito'] = JSON.stringify(this.data);
 
-                        // MANTENER EN LA VENTANA ->
-                        if (window.localStorage.getItem("carrito") !== "undefined") {
-                            this.itemsCarrito = JSON.parse(window.localStorage['carrito']);
-                        }
-                        this.numItemsCarrito = this.itemsCarrito.length;
+                // MANTENER EN LA VENTANA ->
+                if (window.localStorage.getItem("carrito") !== "undefined") {
+                    this.itemsCarrito = JSON.parse(window.localStorage['carrito']);
+                }
+                this.numItemsCarrito = this.itemsCarrito.length;
 
-                        this.addEventListener("itemBuy", function (e) {
-                            // this.itemsCarrito.push(e.detail);
-                            this.push("itemsCarrito", e.detail);
-                            this.numItemsCarrito = this.itemsCarrito.length;
-                            window.localStorage['carrito'] = JSON.stringify(this.itemsCarrito);
-                            var total = 0;
-                            this.itemsCarrito.forEach(function (item) {
-                                total = total + item.precio;
-                            });
-                            this.total = total;
-                            // this.notify.path
-                            // console.log("Local", JSON.parse(window.localStorage['carrito']));
-                        });
-                        this.$.panelheader.parentNode.style.overflow = "scroll";
-                        this.$.panelheader.parentNode.style.overflowX = "hidden";
+                this.addEventListener("itemBuy", function(e) {
+                    // this.itemsCarrito.push(e.detail);
+                    this.push("itemsCarrito", e.detail);
+                    this.numItemsCarrito = this.itemsCarrito.length;
+                    window.localStorage['carrito'] = JSON.stringify(this.itemsCarrito);
+                    var total = 0;
+                    this.itemsCarrito.forEach(function(item) {
+                        total = total + item.precio;
+                    });
+                    this.total = total;
+                    // this.notify.path
+                    // console.log("Local", JSON.parse(window.localStorage['carrito']));
+                });
+                this.$.panelheader.parentNode.style.overflow = "scroll";
+                this.$.panelheader.parentNode.style.overflowX = "hidden";
 
-                        this.addEventListener("moveSubcolection", function (e) {
-                            // TODO: mover el carrosel
-                            // e.detail.accion contiene la accion a realizar
-                            // e.detail.subcolection contiene la subcolection a mover
-                            // console.log("moveSubcolection", e.detail);
-                        });
-                        this.addEventListener("buyAll", function (e) {
-                            console.log("Compra realizada");
-                            this.total = 0;
-                            this.numItemsCarrito = 0;
-                            this.itemsCarrito = [];
-                            window.localStorage['carrito'] = JSON.stringify(this.data);
+                this.addEventListener("moveSubcolection", function(e) {
+                    // TODO: mover el carrosel
+                    // e.detail.accion contiene la accion a realizar
+                    // e.detail.subcolection contiene la subcolection a mover
+                    // console.log("moveSubcolection", e.detail);
+                });
+                this.addEventListener("buyAll", function(e) {
+                    console.log("Compra realizada");
+                    this.total = 0;
+                    this.numItemsCarrito = 0;
+                    this.itemsCarrito = [];
+                    window.localStorage['carrito'] = JSON.stringify(this.data);
 
-                        });
-                    },
-                    onCarrtap: function (e) {
-                        e.stopPropagation();
-                        this.subIsieSelected = false;
-                        this.carritoSelected = true;
-                        // console.log("UOUO", this.itemsCarrito);
-                        // console.log("Pulsado en el menu");
-                        // console.log("Evento onCarrtap,carritoSelected", this.carritoSelected);
-                        // console.log("Evento onCarrtap,subIsieSelected", this.subIsieSelected);
-                    },
-                    onBtnTap: function (e) {
-                        e.stopPropagation();
-                        this.carritoSelected = false;
-                        this.subIsieSelected = true;
-                        // console.log("Evento onBtnTap,carritoSelected", this.carritoSelected);
-                        // console.log("Evento onBtnTap,subIsieSelected", this.subIsieSelected);
-                        this.isSelected = true;
-                        this.$.menu.selected = e.target.id;
-                        this.selectedCategorie = e.target.value;
-                        //this.subcategories = ["Spiderman", "Batman", "Superman"]; this.fire ('change', {title:this.title, time:e.target.value});
-                    },
-                    handleResponse: function (res, req, err) {
-                        this.categories = res.detail.response.names;
-                    },
-                    handleSubcat: function (res, req, err) {
-                        this.subcategories = res.detail.response.subcategories;
-                        // console.log("subcategories", this.subcategories);
-                        // console.log("selectedsubcat", this.selectedCategorie);
-                    },
-                })
+                });
+            },
+            onCarrtap: function(e) {
+                e.stopPropagation();
+                this.subIsieSelected = false;
+                this.carritoSelected = true;
+                // console.log("UOUO", this.itemsCarrito);
+                // console.log("Pulsado en el menu");
+                // console.log("Evento onCarrtap,carritoSelected", this.carritoSelected);
+                // console.log("Evento onCarrtap,subIsieSelected", this.subIsieSelected);
+            },
+            onBtnTap: function(e) {
+                e.stopPropagation();
+                this.carritoSelected = false;
+                this.subIsieSelected = true;
+                // console.log("Evento onBtnTap,carritoSelected", this.carritoSelected);
+                // console.log("Evento onBtnTap,subIsieSelected", this.subIsieSelected);
+                this.isSelected = true;
+                this.$.menu.selected = e.target.id;
+                this.selectedCategorie = e.target.value;
+                //this.subcategories = ["Spiderman", "Batman", "Superman"]; this.fire ('change', {title:this.title, time:e.target.value});
+            },
+            handleResponse: function(res, req, err) {
+                this.categories = res.detail.response.names;
+            },
+            handleSubcat: function(res, req, err) {
+                this.subcategories = res.detail.response.subcategories;
+                // console.log("subcategories", this.subcategories);
+                // console.log("selectedsubcat", this.selectedCategorie);
+            },
+        })
 
-
-        })();
+    })();
     </script>
 </dom-module>
