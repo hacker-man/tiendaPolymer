@@ -15,12 +15,12 @@
             }
             ;
         }
-        
+
         paper-menu {
             --paper-menu-background-color: rgb(124, 247, 124);
             padding: 0;
         }
-        
+
         .div-paper-toolbar {
             background-color: #039003;
             border-bottom: 5px solid black;
@@ -28,7 +28,7 @@
             font-size: 20px;
             font-weight: bold;
         }
-        
+
         .div-colection {
             background-color: grey;
             color: black;
@@ -38,7 +38,7 @@
             margin-bottom: 20px;
             text-align: center;
         }
-        
+
         .div-carrito {
             margin: 20px;
             background-color: #7CF77C;
@@ -49,26 +49,26 @@
             margin-bottom: 20px;
             text-align: center;
         }
-        
+
         .div-subcategorie {
             padding: 20px;
         }
-        
+
         .title-subcategorie {
             /*text-align: center;
             margin:20px;*/
         }
-        
+
         .item-category {
             border: 2px solid black;
         }
-        
+
         .title {
             font-size: 20px !important;
             font-weight: bold !important;
             width: 100%;
         }
-        
+
         .carrito {
             background-color: rgb(124, 247, 124);
             padding: 10px;
@@ -170,8 +170,8 @@
             ready: function() {
 
                 // MANTENER EN LA VENTANA ->
-                // this.itemsCarrito = JSON.parse(window.localStorage['carrito']);
-                // this.numItemsCarrito = this.itemsCarrito.length;
+                //this.itemsCarrito = JSON.parse(window.localStorage['carrito']);
+                this.numItemsCarrito = this.itemsCarrito.length;
 
                 this.addEventListener("itemBuy", function(e) {
                     this.itemsCarrito.push(e.detail);
