@@ -1,66 +1,68 @@
 <dom-module id="wc-carrito">
-    <style>
-    table {
-        margin: 0 auto;
-        border-radius: 10px;
-        border: 3px solid black;
-        background-color: green;
-    }
-    
-    .total {
-        color: white;
-        padding: 20px;
-        font-size: 30px;
-        border-radius: 10px 10px 0px 0px;
-    }
-    
-    .class {
-        background-color: #7CF77C;
-    }
-    
-    .sec {
-        background-color: #7CF77C;
-    }
-    
-    button {
-        padding: 5px;
-        background: green;
-        margin-top: 10px;
-        color: white;
-        font-weight: bold;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-    </style>
-    <table border=1 cellspacing=0 width="45%">
-        <thead>
-            <tr>
-                <th class="total" colspan="3">
-                    PRECIO TOTAL: {{total}}€.
-                </th>
-            </tr>
-            <tr class="sec">
-                <th class="seccion">
-                    Titulo
-                </th>
-                <th class="seccion">
-                    Precio
-                </th>
-            </tr>
-        </thead>
-        <tbody class="class">
-            <template is="dom-repeat" items="{{data}}" as="item">
+    <template>
+        <style>
+        table {
+            margin: 0 auto;
+            border-radius: 10px;
+            border: 3px solid black;
+            background-color: green;
+        }
+        
+        .total {
+            color: white;
+            padding: 20px;
+            font-size: 30px;
+            border-radius: 10px 10px 0px 0px;
+        }
+        
+        .class {
+            background-color: #7CF77C;
+        }
+        
+        .sec {
+            background-color: #7CF77C;
+        }
+        
+        button {
+            padding: 5px;
+            background: green;
+            margin-top: 10px;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        </style>
+        <table border=1 cellspacing=0 width="45%">
+            <thead>
                 <tr>
-                    <td>
-                        {{item.nombre}}
-                    </td>
-                    <td>
-                        {{item.precio}}
-                    </td>
+                    <th class="total" colspan="3">
+                        PRECIO TOTAL: {{total}}€.
+                    </th>
                 </tr>
-            </template>
-        </tbody>
-    </table>
+                <tr class="sec">
+                    <th class="seccion">
+                        Titulo
+                    </th>
+                    <th class="seccion">
+                        Precio
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="class">
+                <template is="dom-repeat" items="{{data}}" as="item">
+                    <tr>
+                        <td>
+                            {{item.nombre}}
+                        </td>
+                        <td>
+                            {{item.precio}}
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+        <button on-tap="tapBuy">Comprar</button>
     </template>
     <script>
     Polymer({
@@ -78,14 +80,16 @@
                 value: 0,
                 notify: true
             },
+            numItemsCarrito: {
+                type: Number,
+                value: 0,
+                notify: true
+            },
         },
-        ready: function() {
-            console.log(this.data);
-            var total = 0;
-            this.data.forEach(function(item) {
-                total = total + item.precio;
-            });
-            this.total = total;
+        ready: function() {},
+        tapBuy: function(e) {
+          e.stopPropagation();
+          this.fire ('buyAll', {evento: e});
         }
     });
     </script>

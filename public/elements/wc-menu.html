@@ -15,12 +15,12 @@
             }
             ;
         }
-
+        
         paper-menu {
             --paper-menu-background-color: rgb(124, 247, 124);
             padding: 0;
         }
-
+        
         .div-paper-toolbar {
             background-color: #039003;
             border-bottom: 5px solid black;
@@ -28,7 +28,7 @@
             font-size: 20px;
             font-weight: bold;
         }
-
+        
         .div-colection {
             background-color: grey;
             color: black;
@@ -38,7 +38,7 @@
             margin-bottom: 20px;
             text-align: center;
         }
-
+        
         .div-carrito {
             margin: 20px;
             background-color: #70FF70;
@@ -49,26 +49,26 @@
             margin-bottom: 20px;
             text-align: center;
         }
-
+        
         .div-subcategorie {
             padding: 20px;
         }
-
+        
         .title-subcategorie {
             /*text-align: center;
             margin:20px;*/
         }
-
+        
         .item-category {
             border: 2px solid black;
         }
-
+        
         .title {
             font-size: 20px !important;
             font-weight: bold !important;
             width: 100%;
         }
-
+        
         .carrito {
             background-color: rgb(124, 247, 124);
             padding: 10px;
@@ -106,7 +106,7 @@
                             <h1>Categoria{{selectedCategorie}}</h1>
                             <template is="dom-repeat" items="{{subcategories}}" as="subcat">
                                 <div class="div-colection">
-                                    <h1 class=>{{subcat}}</h1>
+                                    <h1 class="">{{subcat}}</h1>
                                     <wc-subcategories data={{subcat}}>
                                         <span></span>
                                     </wc-subcategories>
@@ -119,7 +119,7 @@
                 <template is="dom-if" if="{{carritoSelected}}">
                     <div class="div-carrito">
                         <h1>Carrito</h1>
-                        <wc-carrito numItems={{numItemsCarrito}} data={{itemsCarrito}}></wc-carrito>
+                        <wc-carrito numItemsCarrito={{numItemsCarrito}} data={{itemsCarrito}} total={{total}}></wc-carrito>
                     </div>
                 </template>
             </paper-header-panel>
@@ -165,22 +165,38 @@
                 },
                 itemsCarrito: {
                     type: Array,
-                    value: function(){
+                    value: function() {
                         return [];
                     },
                     notify: true
+                },
+                total: {
+                    type: Number,
+                    value: 0
                 }
             },
             ready: function() {
 
+                // BORRAR LOCALSTORAGE
+                // window.localStorage['carrito'] = JSON.stringify(this.data);
+
                 // MANTENER EN LA VENTANA ->
-                //this.itemsCarrito = JSON.parse(window.localStorage['carrito']);
+                if (window.localStorage.getItem("carrito") !== "undefined"){
+                    this.itemsCarrito = JSON.parse(window.localStorage['carrito']);
+                }
                 this.numItemsCarrito = this.itemsCarrito.length;
 
                 this.addEventListener("itemBuy", function(e) {
-                    this.itemsCarrito.push(e.detail);
+                    // this.itemsCarrito.push(e.detail);
+                    this.push("itemsCarrito", e.detail);
                     this.numItemsCarrito = this.itemsCarrito.length;
                     window.localStorage['carrito'] = JSON.stringify(this.itemsCarrito);
+                    var total = 0;
+                    this.itemsCarrito.forEach(function(item) {
+                        total = total + item.precio;
+                    });
+                    this.total = total;
+                    // this.notify.path
                     // console.log("Local", JSON.parse(window.localStorage['carrito']));
                 });
                 this.$.panelheader.parentNode.style.overflow = "scroll";
@@ -192,11 +208,21 @@
                     // e.detail.subcolection contiene la subcolection a mover
                     // console.log("moveSubcolection", e.detail);
                 });
+                this.addEventListener("buyAll", function(e) {
+                    console.log("Compra realizada");
+                    this.total = 0;
+                    this.numItemsCarrito = 0;
+                    this.itemsCarrito = [];
+                    window.localStorage['carrito'] = JSON.stringify(this.data);
+
+                });
             },
             onCarrtap: function(e) {
                 e.stopPropagation();
                 this.subIsieSelected = false;
                 this.carritoSelected = true;
+                // console.log("UOUO", this.itemsCarrito);
+                // console.log("Pulsado en el menu");
                 // console.log("Evento onCarrtap,carritoSelected", this.carritoSelected);
                 // console.log("Evento onCarrtap,subIsieSelected", this.subIsieSelected);
             },
@@ -218,7 +244,7 @@
                 this.subcategories = res.detail.response.subcategories;
                 // console.log("subcategories", this.subcategories);
                 // console.log("selectedsubcat", this.selectedCategorie);
-            }
+            },
         })
 
     })();
