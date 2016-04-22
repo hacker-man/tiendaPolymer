@@ -4,63 +4,76 @@
             <style is="custom-style" > .film-header {
                 @apply(--paper-font-headline);
             }
+            
             .film-light {
                 color: var(--paper-grey-600);
             }
+            
             .film-reserve {
                 color: var(--google-blue-500);
             }
+            
             iron-icon.star {
                 --iron-icon-width: 16px;
                 --iron-icon-height: 16px;
                 color: var(--paper-amber-500);
             }
-            .card-actions{
+            
+            .card-actions {
                 border-top: 3px solid black;
             }
-            paper-card{
+            
+            paper-card {
                 border: 3px solid black;
                 border-radius: 3px;
-                margin:20px;
+                margin: 20px;
             }
-            paper-button{
-                 cursor: pointer;
+            
+            paper-button {
+                cursor: pointer;
             }
-
-        </style> 
-           <paper-card heading="Emmental" image="http://placehold.it/350x150/FFC107/000000">
-                <div class="card-content">
-                    <div class="film-header">{{data.nombre}}</div>
-                    <p>Precio: {{data.precio}} &euro;</p>
-                </div>
-                <div class="card-actions">
-                    <paper-button on-tap="onItemTap" value={{data}}>Añadir Carrito</paper-button>
-                </div>
-            </paper-card>        
+            
+            paper-card.tam {
+                --paper-card-header-image: {
+                    width: 300px;
+                    height: 300px;
+                };
+                
+            }
+        </style>
+        <paper-card class="tam" heading="Emmental" image="{{data.image}}">
+            <div class="card-content">
+                <div class="film-header">{{data.nombre}}</div>
+                <p>Precio: {{data.precio}} &euro;</p>
+            </div>
+            <div class="card-actions">
+                <paper-button on-tap="onItemTap" value={{data}}>Añadir Carrito</paper-button>
+            </div>
+        </paper-card>
     </template>
-<script>
-    (function() {
-        WCItem = Polymer({
-            is: 'wc-item',
-            properties: {
-                 data: {
-                    type: Object,
-                    value: function() {
-                        return [];
+    <script>
+        (function () {
+            WCItem = Polymer({
+                is: 'wc-item',
+                properties: {
+                    data: {
+                        type: Object,
+                        value: function () {
+                            return [];
+                        }
                     }
-                }
-            },
-            ready: function() {
-                // console.log(this.data);
-            },
-            onItemTap: function(e) {
-                e.stopPropagation();
-                this.fire ('itemBuy', e.target.value);
-            },
-/*            handleResponse: function(res, req, err) {
-                this.items = res.detail.response.itemSpiderman;
-            }*/
-        });
-    })();
-</script>
+                },
+                ready: function () {
+                    // console.log(this.data);
+                },
+                onItemTap: function (e) {
+                    e.stopPropagation();
+                    this.fire('itemBuy', e.target.value);
+                },
+                /*            handleResponse: function(res, req, err) {
+                                this.items = res.detail.response.itemSpiderman;
+                            }*/
+            });
+        })();
+    </script>
 </dom-module>

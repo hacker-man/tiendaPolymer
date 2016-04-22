@@ -56,14 +56,17 @@ router.get('/colec-item', function(req, res, next) {
             res.status(200).json({
                 items: [{
                     "nombre": "Superman 1",
-                    "precio": 8
+                    "precio": 8,
+                    "image":"http://nuestroscomics.com/wp-content/uploads/2010/05/sm233.jpg"
 
                 }, {
                     "nombre": "Superman 2",
-                    "precio": 8.5
+                    "precio": 8.5,
+                    "image":"http://nuestroscomics.com/wp-content/uploads/2010/05/sm233.jpg"
                 }, {
                     "nombre": "Superman 3",
-                    "precio": 7.5
+                    "precio": 7.5,
+                    "image":"http://nuestroscomics.com/wp-content/uploads/2010/05/sm233.jpg"
                 }]
 
             });
@@ -73,14 +76,17 @@ router.get('/colec-item', function(req, res, next) {
             res.status(200).json({
                 items: [{
                     "nombre": "Batman 1",
-                    "precio": 8
+                    "precio": 8,
+                    "image":"http://www.fantasymundo.com/galeria/imagenes/Cine01/15652.jpg"
 
                 }, {
                     "nombre": "Batman 2",
-                    "precio": 8.5
+                    "precio": 8.5,
+                    "image":"http://www.fantasymundo.com/galeria/imagenes/Cine01/15652.jpg"
                 }, {
                     "nombre": "Batman 3",
-                    "precio": 7.5
+                    "precio": 7.5,
+                    "image":"http://www.fantasymundo.com/galeria/imagenes/Cine01/15652.jpg"
                 }]
 
             });
@@ -89,14 +95,17 @@ router.get('/colec-item', function(req, res, next) {
             res.status(200).json({
                 items: [{
                     "nombre": "Flash 1",
-                    "precio": 8
+                    "precio": 8,
+                    "image":"http://3.bp.blogspot.com/-4WVvuGq1fKg/VYWga1w2agI/AAAAAAAAK3I/QiwVgyyQ-lo/s1600/The%2BFlash%2B%2523%2B190%2B-%2BJoe%2BKubert.jpg"
 
                 }, {
                     "nombre": "Flash 2",
-                    "precio": 8.5
+                    "precio": 8.5,
+                    "image":"http://3.bp.blogspot.com/-4WVvuGq1fKg/VYWga1w2agI/AAAAAAAAK3I/QiwVgyyQ-lo/s1600/The%2BFlash%2B%2523%2B190%2B-%2BJoe%2BKubert.jpg"
                 }, {
                     "nombre": "Flash 3",
-                    "precio": 7.5
+                    "precio": 7.5,
+                    "image":"http://3.bp.blogspot.com/-4WVvuGq1fKg/VYWga1w2agI/AAAAAAAAK3I/QiwVgyyQ-lo/s1600/The%2BFlash%2B%2523%2B190%2B-%2BJoe%2BKubert.jpg"
                 }]
 
             });
@@ -105,14 +114,17 @@ router.get('/colec-item', function(req, res, next) {
             res.status(200).json({
                 items: [{
                     "nombre": "Spawn 1",
-                    "precio": 8
+                    "precio": 8,
+                    "image":"http://blogdesuperheroes.es/wp-content/plugins/BdSGallery/BdSGaleria/24435.jpg"
 
                 }, {
                     "nombre": "Spawn 2",
-                    "precio": 8.5
+                    "precio": 8.5,
+                    "image":"http://www.previewsworld.com/catalogimages/STK_IMAGES/STK680001-700000/STK689001.jpg"
                 }, {
                     "nombre": "Spawn 3",
-                    "precio": 7.5
+                    "precio": 7.5,
+                    "image":"http://comicattack.net/wp-content/uploads/2012/08/spawn.jpg"
                 }]
 
             });
@@ -121,14 +133,17 @@ router.get('/colec-item', function(req, res, next) {
         res.status(200).json({
             items: [{
                 "nombre": "Sin City 1",
-                "precio": 8
+                "precio": 8,
+                "image":"http://equinoxio.org/UserFiles/image/2010/20100707-sincity1.jpg"
 
             }, {
                 "nombre": "Sin City 2",
-                "precio": 8.5
+                "precio": 8.5,
+                "image":"http://www.fantasymundo.com/galeria/imagenes/Comics01/37067.jpg"
             }, {
                 "nombre": "Sin City 3",
-                "precio": 7.5
+                "precio": 7.5,
+                "image":"http://e.blogs.elcomercio.pe/universocomic/HardGoodbye.jpg"
             }]
 
         });
@@ -137,14 +152,17 @@ router.get('/colec-item', function(req, res, next) {
         res.status(200).json({
             items: [{
                 "nombre": "HellBoy 1",
-                "precio": 8
+                "precio": 8,
+                "image":"http://www.tebeosfera.com/imagenes/numeros/m/a/hellboy_-_baba_yaga_-_norma.jpg"
 
             }, {
                 "nombre": "HellBoy 2",
-                "precio": 8.5
+                "precio": 8.5,
+                "image":"http://1.bp.blogspot.com/-W3uXn4_-mWc/T6QzfCIqgII/AAAAAAAARmo/0ReGUXhGnl4/s1600/Hellboy_Conqeror_Worm_Vol_1_2.jpg"
             }, {
                 "nombre": "HellBoy 3",
-                "precio": 7.5
+                "precio": 7.5,
+                "image":"https://pilgor.files.wordpress.com/2008/09/hellboy3corben.jpg"
             }]
 
         });
@@ -153,14 +171,17 @@ router.get('/colec-item', function(req, res, next) {
             res.status(200).json({
                 items: [{
                     "nombre": "Spiderman 3",
-                    "precio": 10
+                    "precio": 10,
+                    "image":"http://blogdesuperheroes.es/wp-content/plugins/BdSGallery/BdSGaleria/4144.jpg"
 
                 }, {
                     "nombre": "Spiderman 6",
-                    "precio": 10
+                    "precio": 10,
+                    "image":"http://4.bp.blogspot.com/-rVlQgCJF3xY/UO1Ln-xwg5I/AAAAAAAAGtk/0f80wvy7KS8/s1600/Secret+Wars+8.jpg"
                 }, {
                     "nombre": "Spiderman 7",
-                    "precio": 7.5
+                    "precio": 7.5,
+                    "image":"http://i.imgur.com/5ZLTu.jpg"
                 }]
 
             });
@@ -169,14 +190,17 @@ router.get('/colec-item', function(req, res, next) {
         res.status(200).json({
             items: [{
                 "nombre": "Fantastic 4 nº1",
-                "precio": 8
+                "precio": 8,
+                "image":"http://static.batanga.com/sites/default/files/comics.batanga.com/files/La-portada-del-dia-Fantastic-Four-86-1.jpg"
 
             }, {
                 "nombre": "Fantastic 4 nº2",
-                "precio": 8.5
+                "precio": 8.5,
+                "image":"http://blogdesuperheroes.es/wp-content/plugins/BdSGallery/BdSGaleria/8716.jpg"
             }, {
                 "nombre": "Fantastic 4 nº3",
-                "precio": 7.5
+                "precio": 7.5,
+                "image":"http://blogdesuperheroes.es/wp-content/plugins/BdSGallery/BdSGaleria/8716.jpg"
             }]
 
         });
@@ -185,14 +209,17 @@ router.get('/colec-item', function(req, res, next) {
         res.status(200).json({
             items: [{
                 "nombre": "Deadpool 1",
-                "precio": 8
+                "precio": 8,
+                "image":"http://capitalcomic.com/wp-content/uploads/2015/10/True_Believers_Deadpool_the_Musical_Cover.jpeg"
 
             }, {
                 "nombre": "Deadpool 2",
-                "precio": 8.5
+                "precio": 8.5,
+                "image":"http://st-listas.20minutos.es/images/2012-07/338126/3635989_640px.jpg?1415730226"
             }, {
                 "nombre": "Deadpool 3",
-                "precio": 7.5
+                "precio": 7.5,
+                "image":"http://st-listas.20minutos.es/images/2012-07/338126/3635989_640px.jpg?1415730226"
             }]
 
         });
