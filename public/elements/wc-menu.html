@@ -75,6 +75,9 @@
             border-radius: 10px;
             cursor: pointer;
         }
+        .div-login {
+            text-align: center;
+        }
         
         </style>
         <iron-ajax auto url="/api/colec-name" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
@@ -122,6 +125,12 @@
                         <wc-carrito numItemsCarrito={{numItemsCarrito}} data={{itemsCarrito}} total={{total}}></wc-carrito>
                     </div>
                 </template>
+                <template is="dom-if" if="{{loginSelected}}">
+                    <div class="div-login">
+                        <h1>Login</h1>
+                        <wc-login></wc-login>
+                    </div>
+                </template>
             </paper-header-panel>
         </paper-drawer-panel>
     </template>
@@ -147,6 +156,10 @@
                     value: ""
                 },
                 carritoSelected: {
+                    type: Boolean,
+                    value: false
+                },
+                loginSelected: {
                     type: Boolean,
                     value: false
                 },
@@ -196,6 +209,7 @@
                         total = total + item.precio;
                     });
                     this.total = total;
+                    // console.log(this.total, total);
                     // this.notify.path
                     // console.log("Local", JSON.parse(window.localStorage['carrito']));
                 });
@@ -209,6 +223,9 @@
                     // console.log("moveSubcolection", e.detail);
                 });
                 this.addEventListener("buyAll", function(e) {
+                    this.loginSelected = true;
+                    this.subIsieSelected = false;
+                    this.carritoSelected = false;
                     console.log("Compra realizada");
                     this.total = 0;
                     this.numItemsCarrito = 0;
@@ -216,11 +233,17 @@
                     window.localStorage['carrito'] = JSON.stringify(this.data);
 
                 });
+                this.addEventListener("logeado", function(e) {
+                    this.loginSelected = false;
+                    this.subIsieSelected = false;
+                    this.carritoSelected = true;
+                });
             },
             onCarrtap: function(e) {
                 e.stopPropagation();
                 this.subIsieSelected = false;
                 this.carritoSelected = true;
+                this.loginSelected = false;
                 // console.log("UOUO", this.itemsCarrito);
                 // console.log("Pulsado en el menu");
                 // console.log("Evento onCarrtap,carritoSelected", this.carritoSelected);
@@ -230,6 +253,7 @@
                 e.stopPropagation();
                 this.carritoSelected = false;
                 this.subIsieSelected = true;
+                this.loginSelected = false;
                 // console.log("Evento onBtnTap,carritoSelected", this.carritoSelected);
                 // console.log("Evento onBtnTap,subIsieSelected", this.subIsieSelected);
                 this.isSelected = true;

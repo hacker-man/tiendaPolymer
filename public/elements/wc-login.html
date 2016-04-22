@@ -8,8 +8,8 @@
                     <div class="film-header">Nombre: <input type="text" value={{nombre}}></input></div>
                     <div class="film-header">Password: <input type="password" value={{pass}}></input></div>
                 </div>
-                <div class="card-actions">
-                    <paper-button on-tap="onLoginTap">Login</paper-button>
+                <div class="card-actions" on-tap="onLoginTap">
+                    <paper-button >Login</paper-button>
                 </div>
             </paper-card>        
     </template>
@@ -30,10 +30,11 @@
             ready: function() {
                 // console.log(this.data);
             },
-            // onItemTap: function(e) {
-            //     e.stopPropagation();
-            //     this.fire ('itemBuy', e.target.value);
-            // },
+            onLoginTap: function(e) {
+                e.stopPropagation();
+                console.log("click en log");
+                this.fire ('logeado', e.target.value);
+            },
         });
     })();
 </script>
