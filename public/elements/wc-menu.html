@@ -73,7 +73,9 @@
             background-color: rgb(124, 247, 124);
             padding: 10px;
             border-radius: 10px;
+            cursor: pointer;
         }
+        
         </style>
         <iron-ajax auto url="/api/colec-name" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
         <iron-ajax auto url="/api/colec-sub/?sub={{selectedCategorie}}" handle-as="json" on-response="handleSubcat" debounce-duration="300"></iron-ajax>
@@ -117,7 +119,7 @@
                 <template is="dom-if" if="{{carritoSelected}}">
                     <div class="div-carrito">
                         <h1>Carrito</h1>
-                        <wc-carrito data={{itemsCarrito}}></wc-carrito>
+                        <wc-carrito numItems={{numItemsCarrito}} data={{itemsCarrito}}></wc-carrito>
                     </div>
                 </template>
             </paper-header-panel>
