@@ -75,10 +75,10 @@
             border-radius: 10px;
             cursor: pointer;
         }
+        
         .div-login {
             text-align: center;
         }
-        
         </style>
         <iron-ajax auto url="/api/colec-name" handle-as="json" on-response="handleResponse" debounce-duration="300"></iron-ajax>
         <iron-ajax auto url="/api/colec-sub/?sub={{selectedCategorie}}" handle-as="json" on-response="handleSubcat" debounce-duration="300"></iron-ajax>
@@ -194,10 +194,15 @@
                 // window.localStorage['carrito'] = JSON.stringify(this.data);
 
                 // MANTENER EN LA VENTANA ->
-                if (window.localStorage.getItem("carrito") !== "undefined"){
+                if (window.localStorage.getItem("carrito") !== "undefined") {
                     this.itemsCarrito = JSON.parse(window.localStorage['carrito']);
                 }
                 this.numItemsCarrito = this.itemsCarrito.length;
+                var total = 0;
+                this.itemsCarrito.forEach(function(item) {
+                    total = total + item.precio;
+                });
+                this.total = total;
 
                 this.addEventListener("itemBuy", function(e) {
                     // this.itemsCarrito.push(e.detail);
